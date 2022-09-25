@@ -28,13 +28,6 @@ app.get("/todos/:id", function (request, response) {
   // response.send(todo)
 });
 
-app.post("/todos", function (request, response) {
-  console.log("Creating new Todo: ", request.body);
-  // First, we have to query our database to create the new Todo with all relevant attributes coming inside the request body.
-  // Then, we have to respond back with the new Todo instance:
-  // response.send(todo)
-});
-
 app.put("/todos/:id/markAsCompleted", async function (request, response) {
   console.log("We have to update a Todo with ID: ", request.params.id);
   const todo = await Todo.findByPk(request.params.id);

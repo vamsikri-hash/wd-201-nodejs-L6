@@ -10,7 +10,7 @@ app.get("/todos", async function (request, response) {
   console.log("Processing list of all Todos ...");
   try {
     const todos = await Todo.getAllTodos();
-    response.json(todos);
+    return response.json(todos);
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
@@ -22,7 +22,7 @@ app.get("/todos/:id", async function (request, response) {
 
   try {
     const todo = await Todo.findByPk(request.params.id);
-    response.json(todo);
+    return response.json(todo);
   } catch (error) {
     console.log(error);
     return response.status(422).json(error);
@@ -60,9 +60,9 @@ app.delete("/todos/:id", async function (request, response) {
     const todo = await Todo.findByPk(request.params.id);
     if (todo) {
       await todo.delete();
-      response.json(true);
+      return response.json(true);
     } else {
-      response.json(`There is no todo with id ${request.params.id}`);
+      return response.json(false);
     }
   } catch (error) {
     console.log(error);

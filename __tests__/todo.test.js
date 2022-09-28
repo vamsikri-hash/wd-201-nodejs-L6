@@ -61,5 +61,13 @@ describe("List the todo items", function () {
     const deleteResponse = await agent.delete(`/todos/${todoID}`);
     const parsedDeleteResponse = JSON.parse(deleteResponse.text);
     expect(parsedDeleteResponse).toBe(true);
+
+    const deleteResponseForNonExistedTodo = await agent.delete(
+      `/todos/${9999}`
+    );
+    const parsedDeleteResponseForNonExistedTodo = JSON.parse(
+      deleteResponseForNonExistedTodo.text
+    );
+    expect(parsedDeleteResponseForNonExistedTodo).toBe(false);
   });
 });
